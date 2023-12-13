@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic Calculator</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: grid;
+      place-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #calculator {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      max-width: 300px;
+      padding: 20px;
+      background-color: #f3f3f3;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      padding: 15px;
+      font-size: 1.2em;
+      background-color: #e0e0e0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #d0d0d0;
+    }
+
+    #display {
+      grid-column: span 4;
+      padding: 10px;
+      font-size: 1.5em;
+      text-align: right;
+      background-color: #ddd;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="calculator">
+    <div id="display"></div>
+    <button onclick="appendCharacter('7')">7</button>
+    <button onclick="appendCharacter('8')">8</button>
+    <button onclick="appendCharacter('9')">9</button>
+    <button onclick="operate('/')">/</button>
+
+    <button onclick="appendCharacter('4')">4</button>
+    <button onclick="appendCharacter('5')">5</button>
+    <button onclick="appendCharacter('6')">6</button>
+    <button onclick="operate('*')">*</button>
+
+    <button onclick="appendCharacter('1')">1</button>
+    <button onclick="appendCharacter('2')">2</button>
+    <button onclick="appendCharacter('3')">3</button>
+    <button onclick="operate('-')">-</button>
+
+    <button onclick="clearDisplay()">C</button>
+    <button onclick="appendCharacter('0')">0</button>
+    <button onclick="operate('+')">+</button>
+    <button onclick="calculate()">=</button>
+  </div>
+
+  <script>
+    let displayValue = '';
+
+    function updateDisplay() {
+      document.getElementById('display').innerText = displayValue;
+    }
+
+    function appendCharacter(char) {
+      displayValue += char;
+      updateDisplay();
+    }
+
+    function clearDisplay() {
+      displayValue = '';
+      updateDisplay();
+    }
+
+    function operate(operator) {
+      displayValue += ` ${operator} `;
+      updateDisplay();
+    }
+
+    function calculate() {
+      try {
+        displayValue = eval(displayValue).toString();
+        updateDisplay();
+      } catch (error) {
+        displayValue = 'Error';
+        updateDisplay();
+      }
+    }
+  </script>
+</body>
+</html>
+  
